@@ -1,7 +1,21 @@
+
+# Requestify
+Requestify is a lightweight Node.js HTTP framework for building server routes with full TypeScript support. It provides:
+
+Global and route-level middleware with async/Promise support
+
+Custom error handling for all routes
+
+Simple route handlers with typed request, response, and parameters
+
+Convenient response helpers for JSON and plain text
+
+It’s designed to be minimal, type-safe, and easy to use, giving you a structured way to handle HTTP requests without the overhead of larger frameworks.
+
 ## Usage/Examples
 
 ```javascript
-import { Requestify } from "requestify";
+import { Requestify } from "monster";
 
 const server = Requestify({
   global_middleware: [
@@ -23,3 +37,5 @@ const server = Requestify({
 
 server.listen(3000);
 ```
+
+
