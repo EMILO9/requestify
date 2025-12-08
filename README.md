@@ -15,7 +15,7 @@ It’s designed to be minimal, type-safe, and easy to use, giving you a structur
 ## Usage/Examples
 
 ```javascript
-import { Requestify } from "monster";
+import { Requestify } from "requestify";
 
 const server = Requestify({
   global_middleware: [
