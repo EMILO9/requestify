@@ -1,0 +1,41 @@
+{
+	"name": "requestify",
+	"version": "1.0.0",
+	"description": "...",
+	"type": "module",
+	"files": [
+		"dist"
+	],
+	"main": "./dist/entry.cjs",
+	"module": "./dist/entry.mjs",
+	"exports": {
+		".": {
+			"require": {
+				"types": "./dist/entry.d.cts",
+				"default": "./dist/entry.cjs"
+			},
+			"import": {
+				"types": "./dist/entry.d.mts",
+				"default": "./dist/entry.mjs"
+			}
+		}
+	},
+	"scripts": {
+		"build": "tsdown src/entry.ts --format esm --format cjs --dts"
+	},
+	"keywords": [
+		"requestify"
+	],
+	"author": "EMILO9 <dev@gmail.com>",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/node": "^24.10.1",
+		"tsdown": "^0.17.1",
+		"utility-types": "^3.11.0"
+	},
+	"dependencies": {
+		"immutable": "^5.1.4",
+		"joi": "^18.0.2",
+		"path-to-regexp": "^8.3.0"
+	}
+}

@@ -1,0 +1,26 @@
+{
+	"compilerOptions": {
+		"target": "esnext",
+		"lib": ["es2023"],
+		"moduleDetection": "force",
+		"module": "preserve",
+		"moduleResolution": "bundler",
+		"resolveJsonModule": true,
+		"types": ["node"],
+		"strict": true,
+		"noUnusedLocals": true,
+		"declaration": true,
+		"esModuleInterop": true,
+		"isolatedModules": true,
+		"verbatimModuleSyntax": true,
+		"skipLibCheck": true,
+		"isolatedDeclarations": true,
+		"baseUrl": ".",
+		"paths": {
+			"~requestify-types": ["src/types/.RequestifyTypes"],
+			"~types/*": ["src/types/*"],
+			"@core/*": ["src/core/*"]
+		}
+	},
+	"include": ["src", "src/types/.RequestifyTypes.ts"]
+}
