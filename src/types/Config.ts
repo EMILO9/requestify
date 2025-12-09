@@ -1,7 +1,7 @@
 import type { RequestifyTypes } from "~requestify-types";
 
 export type TConfig = {
-	data: Readonly<Record<string, unknown>>;
+	data: Record<string, unknown>;
 	routes: RequestifyTypes.Route[];
 	global_middleware: RequestifyTypes.Handler<
 		void | boolean,
