@@ -1,8 +1,10 @@
 {
 	"name": "@emilo/requestify",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"description": "Requestify is a lightweight Node.js HTTP framework for building server routes with full TypeScript support.",
 	"type": "module",
+	"main": "./dist/entry.cjs",
+	"module": "./dist/entry.mjs",
 	"files": [
 		"dist"
 	],
