@@ -21,7 +21,8 @@
 		}
 	},
 	"scripts": {
-		"build": "tsdown src/entry.ts --format esm --format cjs --dts --minify"
+		"build": "tsdown src/entry.ts --format esm --format cjs --dts --minify",
+		"publish": "npm publish --tag alpha"
 	},
 	"keywords": [
 		"requestify"
