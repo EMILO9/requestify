@@ -10,5 +10,5 @@
 It offers global and route-level middleware, custom error handling, typed request/response objects, and simple helpers for JSON and text responses.
 
 ```bash
-npm install @emilo/requestify@alpha
+npm i @emilo/requestify
 ```
