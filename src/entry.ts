@@ -13,30 +13,24 @@ export function Requestify(
 	config?: DeepPartial<RequestifyTypes.Config>,
 ): Server {
 	const validated = Validate(config);
-	const data = Object.freeze(validated.data); // make it fully immutable with immutable js later, same goes for the entire config.
 	const server = createServer(async (_req, _res) => {
 		const req = Request(_req);
 		const res = Response(_res);
+		const context = { req, res, data: validated.data };
 		const match = FindMatch(validated.routes, req);
 		if (match) {
 			return await ExecHandlers({
-				req,
-				res,
+				...context,
 				match,
 				config: validated,
-				data,
 			});
 		}
 		validated.not_found_handler({
-			req,
-			res,
-			data,
+			...context,
 			errorHandler: (error) =>
 				validated.error_handler({
-					req,
-					res,
+					...context,
 					error,
-					data,
 				}),
 		});
 	});

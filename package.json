@@ -34,7 +34,6 @@
 		"utility-types": "^3.11.0"
 	},
 	"dependencies": {
-		"immutable": "^5.1.4",
 		"joi": "^18.0.2",
 		"path-to-regexp": "^8.3.0"
 	}
