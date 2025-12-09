@@ -1,6 +1,6 @@
 {
 	"name": "@emilo/requestify",
-	"version": "0.0.1-alpha",
+	"version": "0.0.1",
 	"description": "Requestify is a lightweight Node.js HTTP framework for building server routes with full TypeScript support.",
 	"type": "module",
 	"files": [
@@ -22,7 +22,7 @@
 	},
 	"scripts": {
 		"build": "tsdown src/entry.ts --format esm --format cjs --dts --minify",
-		"publish": "npm publish --tag alpha"
+		"publish": "npm publish"
 	},
 	"keywords": [
 		"requestify"
