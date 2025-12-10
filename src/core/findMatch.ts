@@ -1,5 +1,5 @@
 import type { RequestifyTypes } from "~requestify-types";
-import * as ptr from "path-to-regexp";
+import ptr from "path-to-regexp";
 
 export function FindMatch(
 	routes: RequestifyTypes.Route[],

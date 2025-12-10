@@ -15,6 +15,7 @@
 		"verbatimModuleSyntax": true,
 		"skipLibCheck": true,
 		"isolatedDeclarations": true,
+		"allowSyntheticDefaultImports": true,
 		"baseUrl": ".",
 		"paths": {
 			"~requestify-types": ["src/types/.RequestifyTypes"],
@@ -22,5 +23,5 @@
 			"@core/*": ["src/core/*"]
 		}
 	},
-	"include": ["src", "src/types/.RequestifyTypes.ts"]
+	"include": ["src"]
 }

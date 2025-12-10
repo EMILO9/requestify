@@ -1,7 +1,7 @@
 import type { RequestifyTypes } from "~requestify-types";
 import type { ValidationOptions } from "joi";
 
-import * as Joi from "joi";
+import Joi from "joi";
 
 import { RequestifyError } from "@core/requestifyError";
 import { HTTP_METHODS } from "~types/Methods";
