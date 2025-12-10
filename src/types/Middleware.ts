@@ -1,7 +1,7 @@
 import type { RequestifyTypes } from "~requestify-types";
 
-export type THandler = RequestifyTypes.GenericHandler<
-	void,
+export type TMiddleware = RequestifyTypes.GenericHandler<
+	void | boolean,
 	{
 		errorHandler: RequestifyTypes.ErrorInvoker;
 		params: RequestifyTypes.MatchResult["params"];
