@@ -7,3 +7,31 @@
 ```bash
 npm i @emilo/requestify
 ```
+
+```javascript
+import { Requestify, type RequestifyTypes } from "@emilo/requestify";
+
+(async () =>
+	Requestify({
+		routes: [
+			{
+				path: "/",
+				method: "GET",
+				handler: async ({ req, res }) => {
+					res.status(200).json({
+						url: req.url,
+						method: req.method,
+					});
+				},
+				middleware: [
+					() =>
+						new Promise((resolve) =>
+							setTimeout(() => resolve(true), 2000),
+						),
+				],
+			},
+		],
+	}))()
+	.then((app) => app.listen(3000))
+	.catch((error) => console.error(error));
+```
