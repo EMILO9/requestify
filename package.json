@@ -1,6 +1,6 @@
 {
 	"name": "@emilo/requestify",
-	"version": "0.0.5",
+	"version": "0.0.9",
 	"description": "Requestify is a lightweight Node.js HTTP framework for building server routes with full TypeScript support.",
 	"type": "module",
 	"main": "./dist/entry.cjs",
@@ -11,17 +11,19 @@
 	"exports": {
 		".": {
 			"require": {
-				"default": "./dist/entry.cjs",
-				"types": "./dist/entry.d.cts"
+				"default": "./dist/cjs/entry.cjs",
+				"types": "./dist/cjs/entry.d.cts"
 			},
 			"import": {
-				"default": "./dist/entry.mjs",
-				"types": "./dist/entry.d.mts"
+				"default": "./dist/esm/entry.mjs",
+				"types": "./dist/esm/entry.d.mts"
 			}
 		}
 	},
 	"scripts": {
-		"build": "tsdown src/entry.ts --format esm --format cjs --dts --minify",
+		"build:cjs": "tsdown src/entry.ts --format cjs --dts --minify --outDir dist/cjs",
+		"build:esm": "tsdown src/entry.ts --format esm --dts --minify --outDir dist/esm",
+		"build": "npm run build:cjs && npm run build:esm",
 		"publish": "npm publish"
 	},
 	"keywords": [
@@ -40,8 +42,5 @@
 		"joi": "^18.0.2",
 		"path-to-regexp": "^8.3.0",
 		"utility-types": "^3.11.0"
-	},
-	"peerDependencies": {
-		"@types/node": "^24.10.1"
 	}
 }
