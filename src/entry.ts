@@ -25,7 +25,7 @@ export function Requestify<const D extends object>(
 				config: validated,
 			});
 		}
-		validated.not_found_handler({
+		await validated.not_found_handler({
 			...context,
 			errorHandler: (error) =>
 				validated.error_handler({
