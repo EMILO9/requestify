@@ -9,8 +9,8 @@ import { Response } from "@core/res";
 import { FindMatch } from "@core/findMatch";
 import { ExecHandlers } from "@core/ExecHandlers";
 
-export function Requestify(
-	config?: DeepPartial<RequestifyTypes.Config>,
+export function Requestify<const D extends object>(
+	config?: DeepPartial<RequestifyTypes.Config<D>>,
 ): Server {
 	const validated = Validate(config);
 	const server = createServer(async (_req, _res) => {

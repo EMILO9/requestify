@@ -12,16 +12,16 @@ import type { TNotFoundHandler } from "~types/NotFoundHandler";
 import type { TErrorInvoker } from "~types/ErrorInvoker";
 
 export namespace RequestifyTypes {
-	export type Config = TConfig;
-	export type Route = TRoute;
+	export type Config<D = object> = TConfig<D>;
+	export type Route<D = object> = TRoute<D>;
 	export type Methods = TMethods;
 	export type Request = TRequest;
 	export type Response = TResponse;
 	export type GenericHandler<T, E extends object = {}> = TGenericHandler<T, E>;
 	export type MatchResult = TMatchResult;
-	export type Handler = THandler;
-	export type Middleware = TMiddleware;
-	export type ErrorHandler = TErrorHandler;
-	export type NotFoundHandler = TNotFoundHandler;
+	export type Handler<D = object> = THandler<D>;
+	export type Middleware<D = object> = TMiddleware<D>;
+	export type ErrorHandler<D = object> = TErrorHandler<D>;
+	export type NotFoundHandler<D = object> = TNotFoundHandler<D>;
 	export type ErrorInvoker = TErrorInvoker;
 }

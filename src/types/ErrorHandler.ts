@@ -1,6 +1,6 @@
 import type { RequestifyTypes } from "~requestify-types";
 
-export type TErrorHandler = RequestifyTypes.GenericHandler<
+export type TErrorHandler<D> = RequestifyTypes.GenericHandler<
 	void,
-	{ error: unknown }
+	{ error: unknown; data: D }
 >;
