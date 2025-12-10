@@ -9,29 +9,36 @@ npm i @emilo/requestify
 ```
 
 ```javascript
-import { Requestify, type RequestifyTypes } from "@emilo/requestify";
+import { MongoClient } from "mongodb";
+import { Requestify } from "@emilo/requestify";
 
-(async () =>
-	Requestify({
+(async () => {
+	const isDev = process.env.NODE_ENV !== "production";
+	const mongodb = new MongoClient("_fake_mongo_url_");
+	await mongodb.connect();
+	const db = mongodb.db("my-db");
+	const app = Requestify({
+		data: { db, b: 1 },
+		global_middleware: [
+			async ({ req, res, data, params, errorHandler }) => {},
+			...(isDev ? [() => true] : []),
+		],
 		routes: [
 			{
 				path: "/",
 				method: "GET",
-				handler: async ({ req, res }) => {
-					res.status(200).json({
-						url: req.url,
-						method: req.method,
-					});
-				},
-				middleware: [
-					() =>
-						new Promise((resolve) =>
-							setTimeout(() => resolve(true), 2000),
-						),
-				],
+				handler: ({ req, res, data, params, errorHandler }) => {},
+				middleware: [],
 			},
 		],
-	}))()
+		error_handler: async ({ req, res, data, error }) => {},
+		not_found_handler: async ({ req, res, data, errorHandler }) => {},
+	});
+	return app;
+})()
 	.then((app) => app.listen(3000))
-	.catch((error) => console.error(error));
+	.catch((error) => {
+		console.error("Failed to start application:", error);
+		process.exit(1);
+	});
 ```
