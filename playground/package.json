@@ -2,7 +2,13 @@
   "name": "playground",
   "private": true,
   "type": "module",
+  "scripts": {
+      "dev": "tsx watch src/index.ts"
+    },
   "dependencies": {
     "@emilo/requestify": "file:.."
+  },
+  "devDependencies": {
+    "tsx": "^4.23.13"
   }
 }

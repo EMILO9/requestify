@@ -7,9 +7,10 @@
   "module": "./dist/esm/main.mjs",
   "scripts": {
     "build": "tsdown",
-    "attw": "attw --pack .",
+    "watch": "tsdown --watch",
     "playground:install": "npm install --prefix playground",
-    "prepare": "npm run playground:install"
+    "playground:dev": "npm run dev --prefix playground",
+    "dev": "concurrently \"npm run watch\" \"npm run playground:dev\""
   },
   "files": [
     "dist"
@@ -36,6 +37,7 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",
+    "concurrently": "^10.0.5",
     "tsdown": "^0.23.0",
     "typescript": "^7.0.2"
   }
