@@ -1,0 +1,42 @@
+{
+  "name": "@emilo/requestify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/cjs/main.cjs",
+  "types": "./dist/cjs/main.d.cts",
+  "module": "./dist/esm/main.mjs",
+  "scripts": {
+    "build": "tsdown",
+    "attw": "attw --pack .",
+    "playground:install": "npm install --prefix playground",
+    "prepare": "npm run playground:install"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "default": "./dist/esm/main.mjs",
+        "types": "./dist/esm/main.d.mts"
+      },
+      "require": {
+        "default": "./dist/cjs/main.cjs",
+        "types": "./dist/cjs/main.d.cts"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "path-to-regexp": "^8.4.2"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
+    "tsdown": "^0.23.0",
+    "typescript": "^7.0.2"
+  }
+}
