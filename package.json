@@ -33,10 +33,12 @@
   "license": "MIT",
   "type": "module",
   "dependencies": {
-    "path-to-regexp": "^8.4.2"
+    "path-to-regexp": "^8.4.2",
+    "url-join": "^5.0.0"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",
+    "@types/node": "^26.6.1",
     "concurrently": "^10.0.5",
     "tsdown": "^0.23.0",
     "typescript": "^7.0.2"
