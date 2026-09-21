@@ -1,8 +1,24 @@
-import { Requestify } from "@emilo/requestify";
+import Requestify from "@emilo/requestify";
 
-Requestify({
-  "/": [
-    [],
-    [{ path: "/a", methods: ["GET"], middleware: [], handler: () => {} }],
-  ],
-});
+const app = Requestify({
+  global_middleware: [],
+  error_handler: ({ req, res, error }) => {
+    res.raw.end(error);
+  },
+  groups: {
+    "/api": {
+      group_middleware: [],
+      routes: [
+        {
+          path: "/",
+          methods: ["GET"],
+          middleware: [],
+          handler: async ({ req, res }) => {
+            throw new Error("An error occured!");
+            res.raw.end("Hello from Piko!");
+          },
+        },
+      ],
+    },
+  },
+}).listen(3000);
