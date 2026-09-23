@@ -1,24 +1,26 @@
 import Requestify from "@emilo/requestify";
 
 const app = Requestify({
-  global_middleware: [],
-  error_handler: ({ req, res, error }) => {
-    res.raw.end(error);
-  },
-  groups: {
-    "/api": {
-      group_middleware: [],
+  namespaces: {
+    "/": {
+      middleware: [],
       routes: [
         {
           path: "/",
           methods: ["GET"],
-          middleware: [],
-          handler: async ({ req, res }) => {
-            throw new Error("An error occured!");
-            res.raw.end("Hello from Piko!");
+          handler: ({ req, res }) => {
+            throw new Error("Some error!");
+            res.status(200).json({
+              path: req.path,
+              params: req.params,
+              query: req.query,
+              cookies: req.cookies,
+            });
           },
         },
       ],
     },
   },
-}).listen(3000);
+});
+
+app.listen(8080);

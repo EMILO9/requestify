@@ -1,53 +1,43 @@
 import { createServer } from "node:http";
-import request from "./request";
-import response from "./response";
-import type { Config, HttpMethod } from "./types";
-import { match } from "path-to-regexp";
-import urlJoin from "url-join";
-import { compileRoutes } from "./routes";
+import type { Config } from "./types/Config";
+import { request } from "./core/request";
+import { response } from "./core/response";
+import pkg from "@root/package.json";
+import { getRoutes } from "./core/routes";
 
 export default function Requestify(config: Config) {
-  const { global_middleware, groups, error_handler } = config;
-  const routes = compileRoutes(groups);
+  const { namespaces, middleware, errorHandler } = config;
+  const routes = getRoutes(namespaces);
   return createServer(async (_req, _res) => {
     const req = request(_req);
     const res = response(_res);
-    const exec_chain = [...global_middleware];
+    res.setHeader("X-Powered-By", `Requestify/${pkg.version}`);
+    const execChain = [...(middleware ?? [])];
     let matched = false;
     for (const route of routes) {
-      const isMatch = route.isMatch(req.path);
-      if (isMatch && route.methods.includes(req.method)) {
-        exec_chain.push(
-          ...route.group_middleware,
-          ...route.middleware,
-          route.handler,
-        );
-        req.params = isMatch.params;
+      const match = route.match(req.path);
+      if (match && route.methods.includes(req.method)) {
+        execChain.push(...route.middleware, route.handler);
+        req.params = match.params;
         matched = true;
         break;
       }
     }
     if (!matched) {
-      exec_chain.push(async ({ res }) => {
-        res.raw.statusCode = 404;
-        res.raw.setHeader("Content-Type", "text/plain; charset=utf-8");
-        res.raw.end(
-          "404 Not Found: It looks like you forgot to add a route for this path (or forgot to handle this HTTP method)!",
-        );
+      execChain.push(async ({ req, res }) => {
+        res.status(404).send("404: Not Found");
       });
     }
     try {
-      for (const fn of exec_chain) {
+      for (const fn of execChain) {
         const result = await fn({ req, res });
         if (result === false) break;
       }
     } catch (error) {
-      if (error_handler) {
-        await error_handler({ req, res, error });
+      if (errorHandler) {
+        await errorHandler({ req, res, error });
       } else {
-        res.raw.statusCode = 500;
-        res.raw.setHeader("Content-Type", "text/plain; charset=utf-8");
-        res.raw.end("500 Internal Server Error");
+        res.status(500).send("500: Internal Server Error");
       }
     }
   });

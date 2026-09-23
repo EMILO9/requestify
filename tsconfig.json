@@ -16,7 +16,7 @@
     "types": ["node"],
     "resolveJsonModule": true,
     "verbatimModuleSyntax": true,
-    "paths": { "@/*": ["./src/*"] },
+    "paths": { "@/*": ["./src/*"], "@root/*": ["./*"] },
   },
   "include": ["src/**/*"],
 }
