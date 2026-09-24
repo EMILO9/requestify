@@ -45,6 +45,7 @@
     "@types/qs": "^6.15.1",
     "concurrently": "^10.0.5",
     "tsdown": "^0.23.0",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "unrun": "^0.3.1"
   }
 }
