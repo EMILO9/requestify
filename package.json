@@ -8,6 +8,7 @@
   "scripts": {
     "build": "tsdown",
     "watch": "tsdown --watch",
+    "attw": "attw .",
     "playground:install": "npm install --prefix playground",
     "playground:dev": "npm run dev --prefix playground",
     "dev": "concurrently \"npm run watch\" \"npm run playground:dev\""
