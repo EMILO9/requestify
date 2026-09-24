@@ -1,7 +1,8 @@
 import { ServerResponse } from "node:http";
 import * as cookie from "cookie";
+import type { Response } from "@/types/Response";
 
-export function response(res: ServerResponse) {
+export function response(res: ServerResponse): Response {
   return {
     raw: res,
     status(code: number) {
@@ -50,5 +51,3 @@ export function response(res: ServerResponse) {
     },
   };
 }
-
-export type Response = ReturnType<typeof response>;

@@ -2,8 +2,9 @@ import { IncomingMessage } from "node:http";
 import qs from "qs";
 import * as cookie from "cookie";
 import type { HTTPMethod } from "@/types/HTTPMethod";
+import type { Request } from "@/types/Request";
 
-export function request(req: IncomingMessage) {
+export function request(req: IncomingMessage): Request {
   const url = new URL(req.url!, "http://_");
   return {
     raw: req,
@@ -11,9 +12,7 @@ export function request(req: IncomingMessage) {
     method: req.method! as HTTPMethod,
     headers: req.headers,
     query: qs.parse(url.search, { ignoreQueryPrefix: true }),
-    params: {} as Partial<Record<string, string | string[]>>,
+    params: {},
     cookies: cookie.parseCookie(req.headers.cookie || ""),
   };
 }
-
-export type Request = ReturnType<typeof request>;

@@ -1,5 +1,5 @@
-import type { Request } from "@/core/request";
-import type { Response } from "@/core/response";
+import type { Request } from "@/types/Request";
+import type { Response } from "@/types/Response";
 
 export type Handler = (context: {
   req: Request;
