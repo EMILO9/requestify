@@ -9,11 +9,6 @@ const app = Requestify({
           methods: ["GET"],
           handler: ({ req, res }) => res.status(200).send(req.path),
         },
-        {
-          path: "/{*splat}",
-          methods: ["GET"],
-          handler: ({ req, res }) => res.status(200).send("*"),
-        },
       ],
     },
   },

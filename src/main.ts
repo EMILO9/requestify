@@ -3,25 +3,23 @@ import type { Config } from "./types/Config";
 import { request } from "./core/request";
 import { response } from "./core/response";
 import pkg from "@root/package.json";
-import { getRoutes } from "./core/routes";
+import { router } from "./core/router";
+import type { Route } from "./types/Route";
 
 export default function Requestify(config: Config) {
   const { namespaces, middleware, errorHandler } = config;
-  const routes = getRoutes(namespaces);
+  const _router = router(namespaces);
   return createServer(async (_req, _res) => {
     const req = request(_req);
     const res = response(_res);
     res.setHeader("X-Powered-By", `Requestify/${pkg.version}`);
     const execChain = [...(middleware ?? [])];
     let matched = false;
-    for (const route of routes) {
-      const match = route.match(req.path);
-      if (match && route.methods.includes(req.method)) {
-        execChain.push(...route.middleware, route.handler);
-        req.params = match.params;
-        matched = true;
-        break;
-      }
+    const match = _router.lookup(req.path) as Required<Route> & { params?: Record<string, string> };
+    if (match && match.methods.includes(req.method)) {
+      execChain.push(...match.middleware, match.handler);
+      req.params = match.params || {};
+      matched = true;
     }
     if (!matched) {
       execChain.push(async ({ req, res }) => {
