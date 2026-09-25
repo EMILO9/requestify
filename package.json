@@ -35,7 +35,6 @@
   "type": "module",
   "dependencies": {
     "cookie": "^2.0.1",
-    "path-to-regexp": "^8.4.2",
     "qs": "^6.16.0",
     "radix3": "^1.1.2",
     "url-join": "^5.0.0"

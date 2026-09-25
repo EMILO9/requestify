@@ -1,17 +1,19 @@
-import Requestify from "@emilo/requestify";
+import Requestify, { ErrorHandler, Handler } from "@emilo/requestify";
 
 const app = Requestify({
-  namespaces: {
+  port: 3000,
+  routeGroup: {
     "/": {
       routes: [
         {
-          path: "/:slug",
-          methods: ["GET"],
-          handler: ({ req, res }) => res.status(200).send(req.path),
+          path: "/",
+          handler: ({ req, res }) => {
+            res.text(req);
+          },
         },
       ],
     },
   },
 });
 
-app.listen(8080);
+await app.listen();
