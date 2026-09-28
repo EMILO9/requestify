@@ -11,6 +11,8 @@ import { pipeline } from "node:stream/promises";
 import { createReadStream } from "node:fs";
 import { basename } from "node:path";
 
+export { default as json } from "@/mw/json";
+
 export type HTTPMethod =
   "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "OPTIONS";
 
@@ -22,6 +24,7 @@ export interface Request {
   headers: IncomingMessage["headers"];
   cookies: Cookies;
   query: ParsedQs;
+  body?: any;
 }
 
 export interface Response {
