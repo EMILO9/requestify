@@ -1,23 +1,33 @@
-import Requestify, { ErrorHandler, Handler, json } from "@emilo/requestify";
+import Requestify, {
+  Handler,
+  ErrorHandler,
+  json,
+  raw,
+  text,
+  urlencoded,
+  multipart,
+} from "@emilo/requestify";
 
 const app = Requestify({
-  port: 3000,
-  globalMiddleware: [json()],
+  errorHandler: ErrorHandler(({ req, res, error }) => {
+    console.log(error);
+    res.status(200).json({
+      path: req.url,
+      method: req.method,
+      error,
+    });
+  }),
   routeGroup: {
     "/": {
       routes: [
         {
-          path: "/",
-          handler: Handler(({ req, res }) => {
-            res.json(req.body);
-          }),
+          methods: ["GET"],
+          middleware: [],
+          handler: Handler(async ({ req, res }) => {}),
         },
       ],
     },
   },
-  errorHandler: ErrorHandler(({ req, res, error }) => {
-    res.json({ message: error.message });
-  }),
 });
 
 await app.listen();

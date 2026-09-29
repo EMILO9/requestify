@@ -1,6 +1,6 @@
 import { Handler } from "@/main";
 import getRawBody from "raw-body";
-import destr from "destr";
+import { parse as parseQuery } from "qs";
 
 export default function (options?: { limit?: string | number | null }) {
   return Handler(async ({ req }) => {
@@ -9,6 +9,6 @@ export default function (options?: { limit?: string | number | null }) {
       limit: options?.limit ?? "1mb",
       encoding: "utf-8",
     });
-    req.body = destr(raw);
+    req.body = parseQuery(raw);
   });
 }
